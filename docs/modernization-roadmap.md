@@ -86,7 +86,7 @@ flowchart LR
     D --> E[OMERO metadata, groups and annotations]
     D --> F[Pixel reads via Zarr pixel buffer]
     F --> G[S3-compatible object store]
-    E --> H[Data Manager links to OMERO IDs]
+    E --> H[Data Manager software (pending ITSS confirmation) links to OMERO IDs]
 ```
 
 Separate the intended use cases:
@@ -106,7 +106,7 @@ OMERO's documented built-in external authentication mechanism is LDAP. ORCID sup
 Recommended direction:
 
 - Use the institution's managed identity provider (typically LDAP or an institutional OIDC/SAML broker) for account authentication and lifecycle, subject to a tested OMERO mapping and authorization model.
-- Use ORCID primarily as a verified researcher identifier linked to the OMERO/Data Manager person record or publication metadata.
+- Use ORCID primarily as a verified researcher identifier linked to the OMERO/person record in the Data Manager software (pending ITSS confirmation) or publication metadata.
 - If direct “Sign in with ORCID” remains a requirement, run a separate proof of concept. Review code and maintenance status, token/session handling, account linking and duplicate accounts, user/group provisioning, logout/revocation, MFA expectations, and admin credential scope. Require HTTPS end to end and do not expose an OMERO administrator password to a web plugin unless the threat model and controls have been reviewed.
 
 ## Upgrade roadmap
