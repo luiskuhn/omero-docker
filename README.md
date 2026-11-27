@@ -1,6 +1,14 @@
 # OMERO server with Docker Compose
 
-This repository contains Docker Compose examples for running an OMERO server with PostgreSQL and OMERO.web. The setup is based on the [OME OMERO Docker example](https://github.com/ome/docker-example-omero) and includes an optional custom Bio-Formats image build.
+This repository contains Docker Compose examples for running OMERO.server, OMERO.web, and PostgreSQL. It is based on the [OME OMERO Docker example](https://github.com/ome/docker-example-omero) and includes an optional custom Bio-Formats image build.
+
+## QBiC and I3D:bio context
+
+QBiC uses this repository as a Compose-based OMERO prototyping and validation workspace: to stand up representative servers, test patches, version updates, plugins and integrations, and validate candidate production configurations before rollout. It supports isolated development and staging work; it is not, by itself, the complete production service definition.
+
+This work contributes to QBiC's role in **I3D:bio**, particularly spatial-omics research data management (RDM), with spaXio as a motivating use case. The target digital infrastructure uses complementary systems: OMERO manages bioimage datasets, image metadata and image-related annotations, while the QBiC Data Manager manages broader Project → Experiment → Sample → Measurement context and links to omics and other data resources. Records should be linked with typed, instance-aware identifiers; the systems have distinct responsibilities.
+
+The working service model separates three OMERO roles: internal collaborative curation, read-only publication-ready access, and a playground for technical testing. This repository most directly supports the playground and pre-production validation of configurations intended for production. See the [architecture and upgrade roadmap](docs/modernization-roadmap.md) for the current working assumptions and open decisions.
 
 ## Current configuration
 
