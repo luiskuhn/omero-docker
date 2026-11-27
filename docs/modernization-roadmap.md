@@ -6,6 +6,20 @@
 
 At review time, `origin/dev` and `origin/main` resolve to the same commit. The work is still based on `dev` as requested.
 
+## QBiC and I3D:bio context
+
+QBiC uses this repository to prototype and validate OMERO deployments built with Docker Compose. It supports testing OMERO patches and version updates, web plugins, integrations, and candidate configurations intended for production. The Compose files are practical technical examples for development, staging, and production-configuration validation; adopting any configuration in a live service still requires site-specific review, operational ownership, and backup, access-control, and recovery planning.
+
+This work sits within QBiC's contribution to **I3D:bio**, especially WP2's spatial-omics RDM activities, with spaXio as a motivating use case. The target digital infrastructure is distributed across complementary systems rather than one repository for all data:
+
+- **QBiC Data Manager:** project, experiment, sample, and measurement context, together with links to associated omics and other data resources.
+- **OMERO:** bioimage datasets and images, image technical metadata, visualization, and image-related annotations and results.
+- **Storage and workflows:** managed image storage and, where validated for a use case, external OME-Zarr/object storage and reproducible processing workflows.
+
+Cross-system links should preserve the system/instance, object type, and identifier. A Data Manager Measurement and an OMERO Dataset are related but distinct records; neither system replaces the other. OMERO is not intended to become a single store for all spatial-omics and omics data.
+
+The working QBiC service model distinguishes three OMERO roles: (1) internal collaborative curation, (2) read-only publication-ready access, and (3) a playground for technical testing. This repository most directly supports the playground and pre-production validation of changes and production candidate configurations. Testing production configuration means exercising it in an isolated test/staging deployment, not trialing changes against canonical production data. The three-role model and target integrations are working architecture assumptions to confirm with service owners, not a complete approved deployment specification.
+
 ## Executive summary
 
 The `dev` Compose file is a 2023-era setup: PostgreSQL 11, OMERO.server 5.6.7, and OMERO.web 5.21.0. PostgreSQL 11 has been unsupported upstream since November 2023. The current stable OMERO server release documented by OME is 5.6.18; it bundles Bio-Formats 8.5.0 and is documented as tested with OMERO.py 5.22.1 and OMERO.web 5.31.0. OMERO.web 5.33.4 was released on 2026-11-18. PostgreSQL 19 was released on 2026-11-19, but OME's published OMERO 5.6 dependency matrix only covers PostgreSQL through 16. Therefore, PostgreSQL 16 is the most defensible production target from the currently published compatibility evidence; evaluate 17–19 separately before adopting them.
