@@ -7,6 +7,8 @@ This repository contains a solution to setup an OMERO server using docker-compos
 
 ## Related resources
 
+- [Modernization roadmap](docs/modernization-roadmap.md) — current version assessment, compatibility notes, and staged upgrade plan.
+
 - [OME announcements](https://www.openmicroscopy.org/announcements/)
 - [OME Docker site](https://hub.docker.com/u/openmicroscopy)
 - [OMERO docker-compose](https://github.com/ome/docker-example-omero)
