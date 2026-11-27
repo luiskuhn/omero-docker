@@ -8,17 +8,18 @@ At review time, `origin/dev` and `origin/main` resolve to the same commit. The w
 
 ## QBiC and I3D:bio context
 
-QBiC uses this repository to prototype and validate OMERO deployments built with Docker Compose. It supports testing OMERO patches and version updates, web plugins, integrations, and candidate configurations intended for production. The Compose files are practical technical examples for development, staging, and production-configuration validation; adopting any configuration in a live service still requires site-specific review, operational ownership, and backup, access-control, and recovery planning.
+QBiC uses this repository to prototype OMERO deployments with Docker Compose and to validate technical changes: server and web updates, patches, plugins, integrations, and candidate production configurations. Configuration intended for production should first be exercised in an isolated development or staging deployment. The repository is a technical prototyping and validation resource, not the complete production service definition.
 
-This work sits within QBiC's contribution to **I3D:bio**, especially WP2's spatial-omics RDM activities, with spaXio as a motivating use case. The target digital infrastructure is distributed across complementary systems rather than one repository for all data:
+This work supports QBiC's contribution to **I3D:bio**, particularly WP2's interoperable RDM architecture for bioimage and omics data and selected spatial-omics use cases such as spaXio. The target is a distributed infrastructure that preserves authoritative data locations and links specialist systems:
 
-- **QBiC Data Manager:** project, experiment, sample, and measurement context, together with links to associated omics and other data resources.
-- **OMERO:** bioimage datasets and images, image technical metadata, visualization, and image-related annotations and results.
-- **Storage and workflows:** managed image storage and, where validated for a use case, external OME-Zarr/object storage and reproducible processing workflows.
+- **QBiC Data Manager:** project, experiment, sample, and measurement context, plus references to related omics and other data resources.
+- **OMERO:** image-centric Project → Dataset → Image management, technical image metadata, visualization, and image annotations/results. It may manage pixels in its binary repository or reference external pixels where a validated workflow supports that model.
+- **Workflows and storage:** validated metadata, processing, and transfer pathways. SpatialData and OME-Zarr/OME-NGFF are candidates for selected spatial workflows; they do not imply a universal format conversion or a single repository for all modalities.
 
-Cross-system links should preserve the system/instance, object type, and identifier. A Data Manager Measurement and an OMERO Dataset are related but distinct records; neither system replaces the other. OMERO is not intended to become a single store for all spatial-omics and omics data.
+The Data Manager Measurement and OMERO Dataset are distinct records. Cross-system references should preserve system/instance, object type, and object ID; a webclient URL is useful for navigation but should not be the only identifier. Keep high-dimensional molecular resources in their appropriate systems rather than treating OMERO as the repository for all omics data.
 
-The working QBiC service model distinguishes three OMERO roles: (1) internal collaborative curation, (2) read-only publication-ready access, and (3) a playground for technical testing. This repository most directly supports the playground and pre-production validation of changes and production candidate configurations. Testing production configuration means exercising it in an isolated test/staging deployment, not trialing changes against canonical production data. The three-role model and target integrations are working architecture assumptions to confirm with service owners, not a complete approved deployment specification.
+The working QBiC service model has three distinct OMERO roles: internal collaborative curation, read-only publication-ready access, and a playground for testing. Curated bioimage data can move through QC and FAIR-readiness review to publication-ready OMERO access and Data Manager indexing. The playground is outside that data lifecycle and is reserved for disposable or approved non-production fixtures. This repository most directly supports that playground and the pre-production validation of production candidate configurations. Confirm instance topology, ownership, and promotion procedures with service owners; these are working architecture assumptions rather than an approved deployment specification.
+
 
 ## Executive summary
 
