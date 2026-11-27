@@ -4,11 +4,17 @@ This repository contains Docker Compose examples for running OMERO.server, OMERO
 
 ## QBiC and I3D:bio context
 
-QBiC uses this repository as a Compose-based OMERO prototyping and validation workspace: to stand up representative servers, test patches, version updates, plugins and integrations, and validate candidate production configurations before rollout. It supports isolated development and staging work; it is not, by itself, the complete production service definition.
+QBiC uses this repository as a Docker Compose prototyping and validation workspace for OMERO. It is used to stand up representative servers, test patches, version updates, plugins and integrations, and validate candidate production configurations before rollout. Test production configurations in isolated development or staging deployments; this repository is not, by itself, the complete production service definition.
 
-This work contributes to QBiC's role in **I3D:bio**, particularly spatial-omics research data management (RDM), with spaXio as a motivating use case. The target digital infrastructure uses complementary systems: OMERO manages bioimage datasets, image metadata and image-related annotations, while the QBiC Data Manager manages broader Project → Experiment → Sample → Measurement context and links to omics and other data resources. Records should be linked with typed, instance-aware identifiers; the systems have distinct responsibilities.
+The work supports QBiC's contribution to **I3D:bio**, especially WP2's effort to build interoperable bioimage and omics RDM for spatial-omics use cases such as spaXio. The target infrastructure connects specialist systems while keeping data at their authoritative locations:
 
-The working service model separates three OMERO roles: internal collaborative curation, read-only publication-ready access, and a playground for technical testing. This repository most directly supports the playground and pre-production validation of configurations intended for production. See the [architecture and upgrade roadmap](docs/modernization-roadmap.md) for the current working assumptions and open decisions.
+- **QBiC Data Manager:** broader Project → Experiment → Sample → Measurement context and links to related omics and other data resources; it is not the image-pixel store.
+- **OMERO:** image-centric Project → Dataset → Image organization, image pixels or references to managed/external pixels, technical metadata, visualization, and image-related annotations/results.
+- **Workflows and storage:** validated processing and metadata links across systems. SpatialData and OME-Zarr/OME-NGFF are candidates for selected spatial workflows, not a requirement to convert every assay or centralize every file in OMERO.
+
+A cross-system reference should retain the OMERO instance, object type, and object ID, with a web URL as a user-facing link. A Data Manager Measurement and an OMERO Dataset are related but distinct records.
+
+The working service model separates internal collaborative curation, read-only publication-ready access, and a playground for technical testing. Curated data moves through QC/FAIR-readiness review before publication-ready access and Data Manager indexing; the playground remains outside that data lifecycle. This repository most directly supports the playground and pre-production validation. These are working architecture assumptions to confirm with service owners. See the [modernization roadmap](docs/modernization-roadmap.md).
 
 ## Current configuration
 
